@@ -34,7 +34,7 @@ namespace vre
 		VkImage mTextureImage;
 		VkDeviceMemory mTextureImageMemory;
 		VkImageView mTextureImageView;
-		VkSampler mTextureSampler;
+		VkSampler mTextureSampler; // Todo: sample can be standalone not per texture
 	};
 
 } // namespace vre

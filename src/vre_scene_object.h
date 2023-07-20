@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vre_model.h"
+#include "vre_texture.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -48,6 +49,7 @@ namespace vre
 
 		// Optional components
 		std::shared_ptr<VreModel> model{};
+		std::shared_ptr<VreTexture> texture{};
 		std::unique_ptr<PointLightComponent> pointLight = nullptr;
 
 	private:
