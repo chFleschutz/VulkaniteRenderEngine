@@ -1,6 +1,7 @@
 #pragma once
 
 #include "vre_device.h"
+#include "vre_descriptors.h"
 
 #include <vulkan/vulkan.h>
 
@@ -14,6 +15,9 @@ namespace vre
 		struct CreateInfo
 		{
 			std::string textureFilePath;
+			VkSampler& textureSampler;
+			VreDescriptorSetLayout& descriptorSetLayout;
+			VreDescriptorPool& descriptorPool;
 		};
 
 		VreTexture(VreDevice& device, const VreTexture::CreateInfo& createInfo);
@@ -22,19 +26,22 @@ namespace vre
 		VreTexture(const VreTexture&) = delete;
 		VreTexture& operator=(const VreTexture&) = delete;
 
-		VkDescriptorImageInfo descriptorImageInfo();
+		VkDescriptorSet descriptorSet() { return mDescriptorSet; }
 
 	private:
 		void loadTexture(const std::string& filePath);
 		void createImageView();
-		void createTextureSampler();
+		void createTextureSampler(); // Todo remove
+		void createDescriptorSet(const CreateInfo& createInfo);
 
 		VreDevice& mVreDevice;
 
 		VkImage mTextureImage;
 		VkDeviceMemory mTextureImageMemory;
 		VkImageView mTextureImageView;
-		VkSampler mTextureSampler; // Todo: sample can be standalone not per texture
+
+		VkSampler& mTextureSampler;
+		VkDescriptorSet mDescriptorSet;
 	};
 
 } // namespace vre

@@ -5,6 +5,7 @@
 #include "vre_camera.h"
 #include "systems/simple_render_system.h"
 #include "systems/point_light_system.h"
+#include "systems/texture_render_system.h"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -61,6 +62,7 @@ namespace vre
 				.build(globalDescriptorSets[i]);
 		}
 
+		//TextureRenderSystem textureRenderSystem{ mVreDevice, mVreRenderer.swapChainRenderPass(), globalSetLayout->descriptorSetLayout() };
 		SimpleRenderSystem simpleRenderSystem{ mVreDevice, mVreRenderer.swapChainRenderPass(), globalSetLayout->descriptorSetLayout() };
 		PointLightSystem pointLightSystem{ mVreDevice, mVreRenderer.swapChainRenderPass(), globalSetLayout->descriptorSetLayout() };
 
@@ -115,6 +117,7 @@ namespace vre
 				mVreRenderer.beginSwapChainRenderPass(commandBuffer);
 				
 				// render solid objects first
+				//textureRenderSystem.render(frameInfo);
 				simpleRenderSystem.renderGameObjects(frameInfo);
 				pointLightSystem.render(frameInfo);
 				

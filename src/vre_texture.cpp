@@ -1,6 +1,7 @@
 #include "vre_texture.h"
 
 #include "vre_buffer.h"
+#include "vre_descriptors.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
@@ -10,11 +11,11 @@
 namespace vre
 {
 	VreTexture::VreTexture(VreDevice& device, const VreTexture::CreateInfo& createInfo)
-		: mVreDevice{ device }
+		: mVreDevice{ device }, mTextureSampler{ createInfo.textureSampler }
 	{
 		loadTexture(createInfo.textureFilePath);
 		createImageView();
-		createTextureSampler();
+		//createTextureSampler();
 	}
 
 	VreTexture::~VreTexture()
@@ -23,15 +24,6 @@ namespace vre
 		vkDestroyImageView(mVreDevice.device(), mTextureImageView, nullptr);
 		vkDestroyImage(mVreDevice.device(), mTextureImage, nullptr);
 		vkFreeMemory(mVreDevice.device(), mTextureImageMemory, nullptr);
-	}
-
-	VkDescriptorImageInfo VreTexture::descriptorImageInfo()
-	{
-		VkDescriptorImageInfo info{};
-		info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-		info.imageView = mTextureImageView;
-		info.sampler = mTextureSampler;
-		return info;
 	}
 
 	void VreTexture::loadTexture(const std::string& filePath)
@@ -115,6 +107,18 @@ namespace vre
 
 		if (vkCreateSampler(mVreDevice.device(), &samplerInfo, nullptr, &mTextureSampler) != VK_SUCCESS)
 			throw std::runtime_error("failed to create texture sampler");
+	}
+
+	void VreTexture::createDescriptorSet(const CreateInfo& createInfo)
+	{
+		VkDescriptorImageInfo info{};
+		info.imageLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		info.imageView = mTextureImageView;
+		info.sampler = mTextureSampler;
+
+		VreDescriptorWriter(createInfo.descriptorSetLayout, createInfo.descriptorPool)
+			.writeImage(0, &info)
+			.build(mDescriptorSet);
 	}
 
 } // namespace vre
