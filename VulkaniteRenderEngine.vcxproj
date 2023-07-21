@@ -30,7 +30,6 @@
     <ClCompile Include="src\vre_camera.cpp" />
     <ClCompile Include="src\vre_descriptors.cpp" />
     <ClCompile Include="src\vre_device.cpp" />
-    <ClCompile Include="src\vre_material.cpp" />
     <ClCompile Include="src\vre_scene_object.cpp" />
     <ClCompile Include="src\vre_model.cpp" />
     <ClCompile Include="src\vre_pipeline.cpp" />
@@ -49,7 +48,6 @@
     <ClInclude Include="src\vre_descriptors.h" />
     <ClInclude Include="src\vre_device.h" />
     <ClInclude Include="src\vre_frame_info.h" />
-    <ClInclude Include="src\vre_material.h" />
     <ClInclude Include="src\vre_scene_object.h" />
     <ClInclude Include="src\vre_model.h" />
     <ClInclude Include="src\vre_pipeline.h" />

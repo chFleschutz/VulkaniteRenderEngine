@@ -22,7 +22,7 @@ namespace vre
 		void render(FrameInfo& frameInfo);
 
 	private:
-		void createPipelineLayout(VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout;
+		void createPipelineLayout(VkDescriptorSetLayout globalSetLayout, VkDescriptorSetLayout textureSetLayout);
 		void createPipeline(VkRenderPass renderPass);
 
 		VreDevice& mVreDevice;

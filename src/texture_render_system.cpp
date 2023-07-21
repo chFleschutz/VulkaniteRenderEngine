@@ -59,13 +59,13 @@ namespace vre
 				&push);
 			
 
-			vkCmdBindDescriptorSets(
-				frameInfo.commandBuffer,
-				VK_PIPELINE_BIND_POINT_GRAPHICS,
-				mPipelineLayout,
-				0, 1,
-				&,
-				0, nullptr);
+			//vkCmdBindDescriptorSets(
+			//	frameInfo.commandBuffer,
+			//	VK_PIPELINE_BIND_POINT_GRAPHICS,
+			//	mPipelineLayout,
+			//	0, 1,
+			//	&,
+			//	0, nullptr);
 
 			obj.model->bind(frameInfo.commandBuffer);
 			obj.model->draw(frameInfo.commandBuffer);
