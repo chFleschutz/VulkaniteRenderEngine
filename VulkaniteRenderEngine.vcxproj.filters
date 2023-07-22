@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{c234325b-562f-4131-b826-2ea6fae31bbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -63,10 +66,7 @@
     <ClCompile Include="src\vre_texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\texture_render_system.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\texture_render_system.cpp">
+    <ClCompile Include="src\systems\texture_render_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,8 +122,31 @@
     <ClInclude Include="src\vre_texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vre_material.h">
+    <ClInclude Include="src\systems\texture_render_system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\simple_shader.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\simple_shader.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\textured_lit.frag">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\textured_lit.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\point_light.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="shaders\point_light.frag">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
