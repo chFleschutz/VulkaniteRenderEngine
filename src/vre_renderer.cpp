@@ -16,6 +16,41 @@ namespace vre
 		freeCommandBuffers();
 	}
 
+	void VreRenderer::renderFrame(const FrameInfo& frameInfo)
+	{
+		auto commandBuffer = beginFrame();
+		if (!commandBuffer)
+			return;
+
+		beginSwapChainRenderPass(commandBuffer);
+
+		for (const auto& [id, object] : frameInfo.gameObjects)
+		{
+			// only for each type (when it changes)
+			
+			//mVrePipeline->bind(frameInfo.commandBuffer);
+			//vkCmdBindDescriptorSets();
+
+			// for all objects
+			// setup Push constants
+			//vkCmdPushConstants();
+			// bind and draw model
+			//vkCmdDraw();
+		}
+
+		// bind global resourcees          // set 0
+
+		//for each shader {
+		//	bind shader pipeline
+		//		for each material {
+		//			bind material resources  // sets 2,3
+		//		}
+		//}
+
+		endSwapChainRenderPass(commandBuffer);
+		endFrame();
+	}
+
 	VkCommandBuffer VreRenderer::beginFrame()
 	{
 		assert(!mIsFrameStarted && "Cannot call beginFrame while already in progress");
@@ -45,6 +80,7 @@ namespace vre
 	void VreRenderer::endFrame()
 	{
 		assert(mIsFrameStarted && "Cannot call endFrame while frame is not in progress");
+
 		auto commandBuffer = currentCommandBuffer();
 		if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS)
 			throw std::runtime_error("failed to record command buffer");
@@ -103,7 +139,6 @@ namespace vre
 		assert(commandBuffer == currentCommandBuffer() && "Cannot end render pass on a command buffer from a diffrent frame");
 
 		vkCmdEndRenderPass(commandBuffer);
-
 	}
 
 	void VreRenderer::createCommandBuffers()

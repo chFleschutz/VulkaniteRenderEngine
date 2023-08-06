@@ -1,8 +1,11 @@
 #pragma once
 
 #include "vre_device.h"
+#include "vre_frame_info.h"
 #include "vre_swap_chain.h"
 #include "vre_window.h"
+
+#include "vre_pipeline.h"
 
 #include <cassert>
 #include <memory>
@@ -18,6 +21,8 @@ namespace vre
 
 		VreRenderer(const VreRenderer&) = delete;
 		VreRenderer& operator=(const VreRenderer&) = delete;
+
+		void renderFrame(const FrameInfo& frameInfo);
 
 		VkRenderPass swapChainRenderPass() const { return mVreSwapChain->renderPass(); }
 		float aspectRatio() const { return mVreSwapChain->extentAspectRatio(); }
@@ -52,6 +57,8 @@ namespace vre
 		uint32_t mCurrentImageIndex;
 		int mCurrentFrameIndex;
 		bool mIsFrameStarted = false;
+
+		std::vector<VrePipeline> mRenderPipelines;
 	};
 
 } // namespace vre
