@@ -36,16 +36,27 @@ namespace vre
 			//vkCmdPushConstants();
 			// bind and draw model
 			//vkCmdDraw();
+
+			if (!object.material)
+				continue;
+
+			object.material->bind(commandBuffer);
+			object.model->bind(commandBuffer);
+
+			// push constants
+
+			object.model->draw(commandBuffer);
 		}
 
-		// bind global resourcees          // set 0
-
-		//for each shader {
-		//	bind shader pipeline
-		//		for each material {
-		//			bind material resources  // sets 2,3
-		//		}
-		//}
+		// for each object (sorted by material/pipeline)
+		//	bind pipeline (if changed)
+		//	bind descriptor sets (if changed)
+		// 
+		//	push constants
+		//	
+		//	bind vertex buffers (if changed)
+		// 
+		// draw
 
 		endSwapChainRenderPass(commandBuffer);
 		endFrame();
